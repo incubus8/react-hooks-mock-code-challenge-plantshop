@@ -9,6 +9,7 @@ function PlantCard({plant, removePlant}) {
     fetch(`http://localhost:6001/plants/${id}`, {
   method: 'DELETE',
   });
+  // hello
   removePlant(id);
   }
   return (
