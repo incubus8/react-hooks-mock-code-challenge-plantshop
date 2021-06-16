@@ -1,28 +1,29 @@
-import React from "react";
-
-<<<<<<< HEAD
-function PlantCard({image, price, name}) {
+import React, {useState} from "react";
+function PlantCard({plant, removePlant}) {
+  const {id, name, image ="https://via.placeholder.com/400", price} = plant
+  const [outOfStock, setOutOfStock] = useState(true)
+  function handleStock(){
+    setOutOfStock(outOfStock => !outOfStock)
+  }
+  function handleRemove() {
+    fetch(`http://localhost:6001/plants/${id}`, {
+  method: 'DELETE',
+  });
+  removePlant(id);
+  }
   return (
     <li className="card">
-      <img src={image} alt={"plant name"} />
-=======
-function PlantCard(props) {
-  const {id, name, image = "https://via.placeholder.com/400", price} = props
-
-  return (
-    <li className="card">
-      <img src={image}
-       alt={name} />
->>>>>>> 98521ad (2nd deliverable done)
+      <img src={image} alt={name} />
       <h4>{name}</h4>
       <p>Price: {price}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+        <button 
+          onClick={handleStock} 
+          className={outOfStock ? "primary" : ""}>{outOfStock ? "In Stock" : "Out of Stock"}
+        </button>
+        <button
+          onClick={handleRemove}>Remove Plant
+        </button>
     </li>
   );
 }
-
 export default PlantCard;
